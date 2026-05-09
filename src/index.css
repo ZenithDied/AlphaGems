@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ag-bg: #111117;
+  --color-ag-bg2: #16161e;
+  --color-ag-card: #1c1c27;
+  --color-ag-card2: #222230;
+  --color-ag-border: #2e2e3e;
+  --color-ag-border-lit: #3d3d52;
+  --color-ag-purple: #a855f7;
+  --color-ag-purple-dim: #9333ea;
+  --color-ag-purple-glow: rgba(168, 85, 247, 0.25);
+  --color-ag-pink: #ec4899;
+  --color-ag-cyan: #22d3ee;
+  --color-ag-amber: #f59e0b;
+  --color-ag-emerald: #34d399;
+  --color-ag-rose: #fb7185;
+  --color-ag-blue: #60a5fa;
+  --color-ag-indigo: #818cf8;
+  --color-ag-text: #e4e4ef;
+  --color-ag-text-dim: #8888a0;
+  --color-ag-danger: #ef4444;
+  --color-ag-warning: #f59e0b;
+  --color-ag-overlay: rgba(11, 11, 17, 0.92);
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #2e2e3e #111117;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #111117;
+  color: #e4e4ef;
+  overflow-x: hidden;
+}
+
+/* ── all buttons & clickable elements get pointer cursor ── */
+button,
+[role="button"],
+a,
+summary,
+select,
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+label[for] {
+  cursor: pointer;
+}
+
+/* ── subtle background grid + radial glow ── */
+.bg-grid {
+  background-image:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(168, 85, 247, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 100%, rgba(236, 72, 153, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 10% 60%, rgba(34, 211, 238, 0.03) 0%, transparent 50%),
+    linear-gradient(rgba(168, 85, 247, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(168, 85, 247, 0.025) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+}
+
+/* ── noise texture overlay ── */
+.bg-noise::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* ── floating animations ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(2deg); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-float-slow { animation: float-slow 4s ease-in-out infinite; }
+.animate-float-delay { animation: float 3s ease-in-out infinite; animation-delay: 1s; }
+.animate-float-delay2 { animation: float 3.5s ease-in-out infinite; animation-delay: 0.5s; }
+
+.glow-card {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(28, 28, 39, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.glow-card:hover {
+  border-color: #a855f7;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.15), 0 4px 30px rgba(0,0,0,0.3);
+  transform: translateY(-2px);
+  background: rgba(28, 28, 39, 0.85);
+}
+
+.glass {
+  background: rgba(28, 28, 39, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(46, 46, 62, 0.5);
+}
+
+.shimmer-bg {
+  background: linear-gradient(90deg, transparent 0%, rgba(168,85,247,0.08) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
